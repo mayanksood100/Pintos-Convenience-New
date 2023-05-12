@@ -413,13 +413,25 @@ h2{
   transform: scale(1.1);
 }
 
-.card{
+.card {
   background-color: #000;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.card-title{
+.card-body {
+  flex-grow: 1;
+}
+
+.card-title {
   color: #fff;
 }
+
+.card-text {
+  flex-grow: 1;
+}
+
 
 @media screen and (max-width: 875px) {
 

@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar fixed-top navbar-dark navbar-expand-md py-0" id="mainNavbar">
      
-            <a href="#" class="navbar-brand" id="brandName">Pinto's Convenience</a>
+            <a href="./index.html" class="navbar-brand" id="brandName">Pinto's Convenience</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navLinks">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -50,7 +50,7 @@
     <div class="slider">
 
         <div class="info">
-            <h2 id="fireworksH">Celebrate this Diwali With Fireworks!</h2>
+            <h2 id="fireworksH">Celebrate this Victoria Day With Fireworks!</h2>
             <p style="color: #ffffff;">Checkout our amazing Fireworks Selection! Now avaliable for purchase at Pinto's Convenience </p>
         </div>
 
@@ -78,7 +78,7 @@
           <!--radio buttons end-->
           <!--slide images start-->
           <div class="slide first">
-            <img src="./images/diwali.jpeg" alt="">
+            <img src="./images/victoria_day_1.png" alt="">
           </div>
           <div class="slide">
             <img src="./images/f15.png" alt="">
@@ -186,14 +186,54 @@
       <!--image slider end-->
   
       <script type="text/javascript">
-      var counter = 1;
-      setInterval(function(){
-        document.getElementById('radio' + counter).checked = true;
-        counter++;
-        if(counter > 19){
-          counter = 1;
-        }
-      }, 7000);
+     var counter = 1;
+var interval;
+
+function startSlider() {
+  interval = setInterval(function() {
+    document.getElementById('radio' + counter).checked = true;
+    counter++;
+    if (counter > 19) {
+      counter = 1;
+    }
+  }, 3000);
+}
+
+startSlider(); // Start the slider
+
+// Event listener for manual navigation buttons
+var manualNav = document.querySelectorAll('.manual-btn');
+for (var i = 0; i < manualNav.length; i++) {
+  manualNav[i].addEventListener('click', function() {
+    clearInterval(interval); // Stop the automatic slider
+    var radioId = this.getAttribute('for');
+    var slideIndex = radioId.substr(5);
+    counter = parseInt(slideIndex);
+    startSlider(); // Start the slider again
+  });
+}
+
+// Event listener for keyboard arrow keys
+window.addEventListener('keydown', function(event) {
+  if (event.keyCode === 37) { // Left arrow key
+    clearInterval(interval); // Stop the automatic slider
+    counter--;
+    if (counter < 1) {
+      counter = 19;
+    }
+    document.getElementById('radio' + counter).checked = true;
+    startSlider(); // Start the slider again
+  } else if (event.keyCode === 39) { // Right arrow key
+    clearInterval(interval); // Stop the automatic slider
+    counter++;
+    if (counter > 19) {
+      counter = 1;
+    }
+    document.getElementById('radio' + counter).checked = true;
+    startSlider(); // Start the slider again
+  }
+});
+
       </script>
     <br><br>
   <footer>
