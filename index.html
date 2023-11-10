@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pinto's Convenience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
@@ -104,27 +105,7 @@
         <br>
   
         <div class="slides">
-          <!--radio buttons start-->
-          <input type="radio" name="radio-btn" id="radio1">
-          <input type="radio" name="radio-btn" id="radio2">
-          <input type="radio" name="radio-btn" id="radio3">
-          <input type="radio" name="radio-btn" id="radio4">
-          <input type="radio" name="radio-btn" id="radio5">
-          <input type="radio" name="radio-btn" id="radio6">
-          <input type="radio" name="radio-btn" id="radio7">
-          <input type="radio" name="radio-btn" id="radio8">
-          <input type="radio" name="radio-btn" id="radio9">
-          <input type="radio" name="radio-btn" id="radio10">
-          <input type="radio" name="radio-btn" id="radio11">
-          <input type="radio" name="radio-btn" id="radio12">
-          <input type="radio" name="radio-btn" id="radio13">
-          <input type="radio" name="radio-btn" id="radio14">
-          <input type="radio" name="radio-btn" id="radio15">
-          <input type="radio" name="radio-btn" id="radio16">
-          <input type="radio" name="radio-btn" id="radio17">
-          <input type="radio" name="radio-btn" id="radio18">
-          <input type="radio" name="radio-btn" id="radio19">
-          <!--radio buttons end-->
+
           <!--slide images start-->
           <div class="slide first">
             <img src="./images/diwali.jpeg" alt="">
@@ -184,105 +165,85 @@
             <img src="./images/f19.png" alt="">
           </div>
           <!--slide images end-->
-          <!--automatic navigation start-->
-          <div class="navigation-auto">
-            <div class="auto-btn1"></div>
-            <div class="auto-btn2"></div>
-            <div class="auto-btn3"></div>
-            <div class="auto-btn4"></div>
-            <div class="auto-btn5"></div>
-            <div class="auto-btn6"></div>
-            <div class="auto-btn7"></div>
-            <div class="auto-btn8"></div>
-            <div class="auto-btn9"></div>
-            <div class="auto-btn10"></div>
-            <div class="auto-btn11"></div>
-            <div class="auto-btn12"></div>
-            <div class="auto-btn13"></div>
-            <div class="auto-btn14"></div>
-            <div class="auto-btn15"></div>
-            <div class="auto-btn16"></div>
-            <div class="auto-btn17"></div>
-            <div class="auto-btn18"></div>
-            <div class="auto-btn19"></div>
-          </div>
-          <!--automatic navigation end-->
+
+          <div class="navigation-arrows">
+            <i class="fas fa-arrow-left fa-2x arrow-btn" id="prev"></i>
+            <i class="fas fa-arrow-right fa-2x arrow-btn" id="next"></i>
+          </div>          
+
         </div>
-        <!--manual navigation start-->
-        <div class="navigation-manual">
-          <label for="radio1" class="manual-btn"></label>
-          <label for="radio2" class="manual-btn"></label>
-          <label for="radio3" class="manual-btn"></label>
-          <label for="radio4" class="manual-btn"></label>
-          <label for="radio5" class="manual-btn"></label>
-          <label for="radio6" class="manual-btn"></label>
-          <label for="radio7" class="manual-btn"></label>
-          <label for="radio8" class="manual-btn"></label>
-          <label for="radio9" class="manual-btn"></label>
-          <label for="radio10" class="manual-btn"></label>
-          <label for="radio11" class="manual-btn"></label>
-          <label for="radio12" class="manual-btn"></label>
-          <label for="radio13" class="manual-btn"></label>
-          <label for="radio14" class="manual-btn"></label>
-          <label for="radio15" class="manual-btn"></label>
-          <label for="radio16" class="manual-btn"></label>
-          <label for="radio17" class="manual-btn"></label>
-          <label for="radio18" class="manual-btn"></label>
-          <label for="radio19" class="manual-btn"></label>
-        </div>
-        <!--manual navigation end-->
+
       </div>
       <!--image slider end-->
   
       <script type="text/javascript">
-     var counter = 1;
-var interval;
+   
+   var counter = 0; // Start from the first slide
+  var slides = document.querySelectorAll('.slide');
+  var interval;
 
-function startSlider() {
-  interval = setInterval(function() {
-    document.getElementById('radio' + counter).checked = true;
+  function startSlider() {
+    interval = setInterval(function () {
+      nextSlide();
+    }, 3000);
+  }
+
+  function nextSlide() {
     counter++;
-    if (counter > 19) {
-      counter = 1;
+    if (counter >= slides.length) {
+      counter = 0; // Loop back to the first slide
     }
-  }, 3000);
-}
+    updateSlide();
+  }
 
-startSlider(); // Start the slider
+  function prevSlide() {
+    counter--;
+    if (counter < 0) {
+      counter = slides.length - 1; // Go to the last slide when reaching the beginning
+    }
+    updateSlide();
+  }
 
-// Event listener for manual navigation buttons
-var manualNav = document.querySelectorAll('.manual-btn');
-for (var i = 0; i < manualNav.length; i++) {
-  manualNav[i].addEventListener('click', function() {
+  function updateSlide() {
+    // Hide all slides
+    slides.forEach(function (slide) {
+      slide.style.display = 'none';
+    });
+
+    // Show the current slide
+    slides[counter].style.display = 'block';
+  }
+
+  startSlider(); // Start the slider
+
+  // Event listener for arrow buttons
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+
+  prevBtn.addEventListener('click', function () {
     clearInterval(interval); // Stop the automatic slider
-    var radioId = this.getAttribute('for');
-    var slideIndex = radioId.substr(5);
-    counter = parseInt(slideIndex);
+    prevSlide();
     startSlider(); // Start the slider again
   });
-}
 
-// Event listener for keyboard arrow keys
-window.addEventListener('keydown', function(event) {
-  if (event.keyCode === 37) { // Left arrow key
+  nextBtn.addEventListener('click', function () {
     clearInterval(interval); // Stop the automatic slider
-    counter--;
-    if (counter < 1) {
-      counter = 19;
-    }
-    document.getElementById('radio' + counter).checked = true;
+    nextSlide();
     startSlider(); // Start the slider again
-  } else if (event.keyCode === 39) { // Right arrow key
-    clearInterval(interval); // Stop the automatic slider
-    counter++;
-    if (counter > 19) {
-      counter = 1;
-    }
-    document.getElementById('radio' + counter).checked = true;
-    startSlider(); // Start the slider again
-  }
-});
+  });
 
+  // Event listener for keyboard arrow keys
+  window.addEventListener('keydown', function (event) {
+    if (event.keyCode === 37) { // Left arrow key
+      clearInterval(interval); // Stop the automatic slider
+      prevSlide();
+      startSlider(); // Start the slider again
+    } else if (event.keyCode === 39) { // Right arrow key
+      clearInterval(interval); // Stop the automatic slider
+      nextSlide();
+      startSlider(); // Start the slider again
+    }
+  });
       </script>
     <br><br>
   <footer>
