@@ -16,8 +16,9 @@ body{
 }
 
 .slider{
-  width: 1200px;
-  height: 850px;
+  width: 100%;
+  max-width: 1200px;
+  height: auto; /* Adjust height for responsiveness */
   border-radius: 10px;
   overflow: hidden;
   margin: 100px auto;
@@ -292,6 +293,33 @@ nav {
 }
 
 @media (max-width: 768px) {
+  .slider {
+    margin: 50px auto; /* Adjust margin for better spacing on mobile */
+  }
+
+  .slides {
+    height: auto;
+  }
+
+  .slide {
+    width: 100%;
+  }
+
+  .navigation-auto,
+  .navigation-manual {
+    margin-top: -20px; /* Adjust margin for better positioning on mobile */
+  }
+
+  .navigation-auto div,
+  .manual-btn {
+    font-size: 12px; /* Adjust font size for better visibility on mobile */
+  }
+
+  .navigation-auto,
+  .navigation-manual {
+    bottom: 10px; /* Adjust bottom position for better visibility on mobile */
+  }
+
   #mainNavbar .nav-link {
       margin: 10px 0;
   }
