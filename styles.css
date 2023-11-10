@@ -131,6 +131,15 @@ nav {
 }
 
 @media (max-width: 768px) {
+  .jumbotron {
+    height: 325px;
+    margin-top: 100px;
+  }
+
+  #storefront {
+    width: 50%;
+  }
+
   .slider {
     margin: 50px auto; /* Adjust margin for better spacing on mobile */
   }
